@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reading Mode Settings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      width: 200px;
+    }
+    select, button {
+      margin: 5px 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h3>Reading Mode Settings</h3>
+  <label for="fontSize">Font Size:</label>
+  <select id="fontSize">
+    <option value="16px">16px</option>
+    <option value="18px">18px</option>
+    <option value="20px">20px</option>
+  </select>
+  <label for="bgColor">Background Color:</label>
+  <input type="color" id="bgColor" value="#f5f5f5">
+  <button id="saveBtn">Save Settings</button>
+  <button id="readAloudBtn">Read Aloud</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>
