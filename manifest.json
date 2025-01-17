@@ -5,10 +5,14 @@
     "version": "1.0",
     "permissions": [
       "activeTab",
-      "storage"
+      "storage",
+      "tabs",
+      "contextMenus",
+      "scripting"
     ],
     "background": {
-      "service_worker": "background.js"
+      "service_worker": "background.js",
+      "type": "module"
     },
     "action": {
       "default_popup": "popup.html",
@@ -27,7 +31,8 @@
     ],
     "host_permissions": [
       "http://*/*",
-      "https://*/*"
+      "https://*/*",
+      "<all_urls>"
     ]
   }
   
