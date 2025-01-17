@@ -4,31 +4,229 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reading Mode Settings</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <style>
-    body {
-      font-family: Century Gothic, sans-serif;
-      width: 200px;
-      background-color: antiquewhite;
+    :root {
+      --primary-color: #4a90e2;
+      --secondary-color: #f5f5f5;
+      --text-color: #333;
+      --transition-speed: 0.3s;
     }
-    select, button {
-      margin: 5px 0;
+
+    body {
+      font-family: 'Segoe UI', 'Century Gothic', sans-serif;
+      width: 300px;
+      background: linear-gradient(145deg, #ffffff, var(--secondary-color));
+      padding: 20px;
+      margin: 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background var(--transition-speed);
+    }
+
+    .container {
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    h3 {
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      font-size: 1.5em;
+      text-align: center;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 10px;
+      animation: slideInDown 0.5s ease-out;
+    }
+
+    .setting-group {
+      margin-bottom: 15px;
+      opacity: 0;
+      animation: slideInRight 0.5s ease-out forwards;
+      animation-delay: calc(var(--delay) * 0.1s);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-color);
+      font-weight: 500;
+      transition: color var(--transition-speed);
+    }
+
+    select, input[type="color"], input[type="range"] {
       width: 100%;
+      padding: 8px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      background: white;
+      margin-bottom: 10px;
+      transition: all var(--transition-speed);
+    }
+
+    select:hover, input[type="color"]:hover {
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    .theme-preview {
+      width: 100%;
+      height: 100px;
+      border-radius: 8px;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-speed);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .button-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all var(--transition-speed);
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+
+    #saveBtn {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    #readAloudBtn {
+      background: #28a745;
+      color: white;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .features-list {
+      margin-top: 15px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 8px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .reading-speed {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .speed-value {
+      min-width: 60px;
+      text-align: center;
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+        color: #fff;
+      }
+      
+      label {
+        color: #fff;
+      }
+      
+      select, input[type="color"] {
+        background: #333;
+        color: #fff;
+        border-color: #444;
+      }
     }
   </style>
 </head>
 <body>
-  <h3>Reading Mode Settings</h3>
-  <label for="fontSize">Font Size:</label>
-  <select id="fontSize">
-    <option value="16px">16px</option>
-    <option value="18px">18px</option>
-    <option value="20px">20px</option>
-  </select>
-  <label for="bgColor">Background Color:</label>
-  <input type="color" id="bgColor" value="#f5f5f5">
-  <button id="saveBtn">Save Settings</button>
-  <button id="readAloudBtn">Read Aloud</button>
+  <div class="container">
+    <h3 class="animate__animated animate__fadeIn">Reading Mode Pro</h3>
+    
+    <div class="setting-group" style="--delay: 1">
+      <label for="fontSize">Font Size:</label>
+      <select id="fontSize">
+        <option value="14px">14px - Compact</option>
+        <option value="16px">16px - Default</option>
+        <option value="18px">18px - Comfortable</option>
+        <option value="20px">20px - Large</option>
+        <option value="24px">24px - Extra Large</option>
+      </select>
+    </div>
 
+    <div class="setting-group" style="--delay: 2">
+      <label for="fontFamily">Font Family:</label>
+      <select id="fontFamily">
+        <option value="Arial">Arial - Sans-serif</option>
+        <option value="Georgia">Georgia - Serif</option>
+        <option value="Verdana">Verdana - Clear</option>
+        <option value="OpenDyslexic">OpenDyslexic - Readable</option>
+      </select>
+    </div>
+
+    <div class="setting-group" style="--delay: 3">
+      <label for="bgColor">Theme Color:</label>
+      <input type="color" id="bgColor" value="#f5f5f5">
+      <div class="theme-preview" id="themePreview">Preview Text</div>
+    </div>
+
+    <div class="setting-group" style="--delay: 4">
+      <label for="readingSpeed">Reading Speed:</label>
+      <div class="reading-speed">
+        <input type="range" id="readingSpeed" min="100" max="400" step="25" value="200">
+        <span class="speed-value">200 wpm</span>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button id="saveBtn">
+        <span class="button-content">Save Settings</span>
+      </button>
+      <button id="readAloudBtn">
+        <span class="button-content">Read Aloud</span>
+      </button>
+    </div>
+
+    <div class="features-list">
+      <small>✨ New Features:
+        <ul>
+          <li>Dark mode support</li>
+          <li>Dyslexia-friendly font</li>
+          <li>Reading speed control</li>
+        </ul>
+      </small>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></script>
   <script src="popup.js"></script>
 </body>
 </html>
