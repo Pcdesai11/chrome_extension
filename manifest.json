@@ -1,14 +1,18 @@
 {
     "manifest_version": 3,
-    "name": "Reading Mode for Websites",
-    "description": "Clean up websites and make them more readable.",
-    "version": "1.0",
+    "name": "Smart Reading Mode Pro",
+    "version": "1.0.0",
+    "description": "An intelligent reading mode with smart formatting, animations, and customization options for a better reading experience.",
     "permissions": [
-      "activeTab",
       "storage",
       "tabs",
       "contextMenus",
-      "scripting"
+      "scripting",
+      "notifications",
+      "clipboardRead"
+    ],
+    "host_permissions": [
+      "<all_urls>"
     ],
     "background": {
       "service_worker": "background.js",
@@ -17,22 +21,40 @@
     "action": {
       "default_popup": "popup.html",
       "default_icon": {
-        "16": "icons/icon16.png"
-     
-      }
+        "16": "icons/icon16.png",
+        "32": "icons/icon32.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+      },
+      "default_title": "Smart Reading Mode Pro"
     },
-    
+    "icons": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
     "content_scripts": [{
-    "matches": ["<all_urls>"],
-    "js": ["content.js"],
-    "css": ["content.css"]
+      "matches": ["<all_urls>"],
+      "css": ["content.css"],
+      "js": ["content.js"]
+    }],
+    "web_accessible_resources": [{
+      "resources": [
+        "assets/animations/*.json",
+        "assets/sounds/*.mp3",
+        "assets/styles/*.css"
+      ],
+      "matches": ["<all_urls>"]
+    }],
+    "options_page": "options.html",
+    "commands": {
+      "_execute_action": {
+        "suggested_key": {
+          "default": "Ctrl+Shift+R",
+          "mac": "Command+Shift+R"
+        },
+        "description": "Toggle Reading Mode"
+      }
     }
-      
-    ],
-    "host_permissions": [
-      "http://*/*",
-      "https://*/*",
-      "<all_urls>"
-    ]
   }
-  
